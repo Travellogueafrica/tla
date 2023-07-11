@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Starter Page | Skote - Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="/static/admin/images/favicon.ico">
+
+        <link href="/static/admin/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+
+        <!-- Bootstrap Css -->
+        <link href="/static/admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="/static/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="/static/admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <!-- TinyMCE Editor -->
+        <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+              selector: '.text-editor',
+              toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
+            });
+        </script> -->
+        <style>
+            .ck-editor__editable[role="textbox"] {
+                /* editing area */
+                height: 200px;
+                max-height: 250px;
+            }
+        </style>
+    </head>
+
+    <body data-sidebar="dark" data-layout-mode="light">
+
+        <div id="layout-wrapper">
+            <%- include('partials/header') %>
+            <%- include('partials/navigation') %>
+            <div class="main-content">
+                <%- body %>
+                <%- include('partials/footer') %>
+            </div>
+        </div>
+        
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+        <script src="/static/admin/libs/jquery/jquery.min.js"></script>
+        <script src="/static/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/admin/libs/metismenu/metisMenu.min.js"></script>
+        <script src="/static/admin/libs/simplebar/simplebar.min.js"></script>
+        <script src="/static/admin/libs/node-waves/waves.min.js"></script>
+        <script src="/static/admin/libs/select2/js/select2.min.js"></script>
+        <script src="/static/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+        <script src="/static/admin/js/pages/bootstrap-toastr.init.js"></script>
+        <script src="/static/admin/js/pages/form-advanced.init.js"></script>
+        <script src="/static/admin/libs/parsleyjs/parsley.min.js"></script>
+        <script src="/static/admin/js/pages/form-validation.init.js"></script>
+        <script src="/static/admin/js/pages/modal.init.js"></script>
+        <script src="/static/admin/js/pages/alerts.init.js"></script>
+
+        <script src="/static/admin/js/app.js"></script>
+        <script src="/static/admin/js/custom.js"></script>
+        <!-- CKEditor -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '.text-editor' ), {
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                        ]
+                    }
+
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+    </body>
+</html>

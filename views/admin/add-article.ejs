@@ -1,0 +1,204 @@
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Add Article</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Add Article</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="custom-validation" id="articleForm" method="post" action="#">
+                    <div class="card">
+                        <div class="card-body">
+    
+                            <h4 class="card-title">Basic Info</h4>
+                            <p class="card-title-desc">Fields marked (*) are required. Others maybe optional but essential.</p>
+    
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <input type="hidden" value="<%- edit ? article._id : '' %>" id="identity">
+                                    <div class="mb-3">
+                                        <label for="productname">Post Title *</label>
+                                        <input id="title" name="title" type="text" class="form-control" value="<%- edit ? article.title : '' %>" required placeholder="Post Title">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category *</label>
+                                                <select class="form-control select2" id="category" required="">
+                                                    <option value="">Select</option>
+                                                    <% if (categories.length) { %>
+                                                        <% categories.forEach(function(category, index){ %>
+                                                            <option value="<%- category.slug %>" <%- edit ? 
+                                                                (article.category.slug == category.slug) ? 'selected' : '' 
+                                                                : '' %> > <%- category.label %> </option>
+                                                        <% }) %>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Type *</label>
+                                                <select class="form-control select2" id="type" required="">
+                                                    <option value="" <%- edit ? (article.type === '' ? 'selected' : '') : '' %> >Select</option>
+                                                    <option value="Article" <%- edit ? (article.type === 'Article' ? 'selected' : 'none') : '' %> >Article</option>
+                                                    <option value="Video" <%- edit ? (article.type === 'Video' ? 'selected' : 'none') : '' %> >Video</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Short Content<small>(max. 250 characters)</small></label>
+                                        <input type="text" class="form-control" id="short-content" data-parsley-maxlength="250" value="<%- edit ? article.short_content : '' %>" name="short-content" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Content *</label>
+                                    <textarea class="form-control text-editor" id="content" rows="15" required placeholder="Write content here..."><%- edit ? article.content : '' %></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Image Preview</label>
+                                        <div class="position-relative mb-3">
+                                            <img src="<%- edit ? article.image[1] : '/static/admin/images/small/img-2.jpg' %> " alt="" class="img-thumbnail preview" >
+                                        </div>
+                                        <input type="hidden" id="image">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="" class="form-label">Select Image</label>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" id="imagefile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                            <button class="btn btn-primary upload-file" type="button" id="inputGroupFileAddon04">Upload</button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Mark as Editorial</label>
+                                        <div class="square-switch" style="float:right">
+                                            <input type="checkbox" id="switch3" switch="bool" <%- edit ? article.editorial ? 'checked' : '' : '' %> />
+                                            <label for="switch3" data-on-label="On"
+                                                data-off-label="Off"></label>
+                                        </div>
+                                    </div>
+
+                                   <div class="mb-3">
+                                        <label class="form-label">Show as Featured Article</label>
+                                        <div class="square-switch" style="float:right">
+                                            <input type="checkbox" id="switch1" <%- edit ? article.featured ? 'checked' : '' : '' %> switch="none" />
+                                            <label for="switch1" data-on-label="On" data-off-label="Off"></label>
+                                        </div>
+                                   </div>
+                                   <div class="mb-3">
+                                        <label class="form-label" style="float:left">Publish Article Immediately</label>
+                                        <div class="square-switch" style="float:right">
+                                            <input type="checkbox" id="switch2" <%- edit ? article.status ? 'checked' : '' : '' %> switch="info" />
+                                            <label for="switch2" data-on-label="On" data-off-label="Off"></label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Post Attributes</h4>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="mb-3">
+                                        <label for="productname">Media Link (if post type is video)</label>
+                                        <input id="media" name="media" type="text" class="form-control" value="<%- edit ? article.media : '' %>" placeholder="Media Link">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Keywords</label>
+
+                                        <select class="select2 form-control select2-multiple"
+                                            multiple="multiple" data-placeholder="Choose ..." id="keywords">
+                                            <% if (tags.length){ %>
+                                                <% tags.forEach(function(tag, index){ %>
+                                                    <option value="<%- tag.name %>" <%- edit ? 
+                                                        tag.name  == article.keywords[index] ? 'selected' : '' 
+                                                        : '' %> > <%- tag.name %> </option>
+                                                <% }) %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Author *</label>
+                                        <select class="form-control select2" id="author" required="">
+                                            <option value="">Select</option>
+                                            <% if (authors.length) { %>
+                                                <% authors.forEach(function(author, index){ %>
+                                                    <!-- <option value="<%- author.slug %>" ><%- author.firstname + ' ' +author.lastname %></option> -->
+                                                    <option value="<%- author.slug %>" <%- edit ? 
+                                                        (article.author.slug == author.slug) ? 'selected' : '' 
+                                                        : '' %> > <%- author.firstname + ' ' + author.lastname %> </option>
+                                                <% }) %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Destination *</label>
+                                        <select class="form-control select2" id="destination" required="">
+                                            <option value="">Select</option>
+                                            <% if (destinations.length) { %>
+                                                <% destinations.forEach(function(destination, index){ %>
+                                                    <option value="<%- destination.slug %>" <%- edit ? 
+                                                        (article.destination.slug == destination.slug) ? 'selected' : '' 
+                                                        : '' %> > <%- destination.name %> </option>
+                                                <% }) %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="media">Meta Title</label>
+                                        <input id="meta-title" name="meta-title" type="text" class="form-control" value="<%- edit ? article.meta_title : '' %>" placeholder="Meta Title">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="metakeyowrds">Meta Keywords (separate words with comma)</label>
+                                        <input id="meta-keyword" name="meta-keyword" type="text" class="form-control" value="<%- edit ? article.meta_keyword : '' %>" placeholder="Meta Keywords">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="meta-description">Meta Description</label>
+                                        <textarea class="form-control" id="meta-desc" rows="5" placeholder="Meta Description"><%- edit ? article.meta_description : '' %></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save Content</button>
+                                <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+        <!-- end row -->
+        
+    </div> <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
