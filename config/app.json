@@ -4,5 +4,9 @@
         "db":"travellog-dataset",
         "host":"127.0.0.1",
         "port":"27017"
+    },
+    "jwt": {
+        "key": "18LuckyStars!!!",
+        "expires": "1d"
     }
 }

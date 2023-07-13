@@ -10,6 +10,8 @@ router.use('/', require('./app'))
 //Admin Page Route
 router.use('/admin', require('./admin'))
 
+router.use('/auth', require('./auth'))
+
 //API Routes
 router.use(api+'/user', require('./user'))
 router.use(api+'/category', require('./category'))

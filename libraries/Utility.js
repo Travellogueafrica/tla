@@ -1,3 +1,5 @@
+const _config = require('./../config/app.json')
+
 const Util = {
 
     param_extract: (req) => {
@@ -13,6 +15,24 @@ const Util = {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         return res;
+    },
+
+    hash_password: (value) => {
+        const bcrypt = require('bcryptjs')
+        const salt = bcrypt.genSaltSync(10)
+        return bcrypt.hashSync(value, salt)
+    },
+
+    passwordCompare: (pass1, pass2, callback) => {
+        const bcrypt = require('bcryptjs')
+        const result = bcrypt.compareSync(pass1, pass2)
+        return callback(result)
+    },
+
+    tokenize: (payload, callback) => {
+        const jwt = require('jsonwebtoken')
+        const token = jwt.sign(payload, _config.jwt.key, {expiresIn: _config.jwt.expires})
+        return callback(token)
     }
 }
 

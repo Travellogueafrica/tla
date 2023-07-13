@@ -251,4 +251,29 @@ $(document).ready(function($){
         }
        })
     })
+
+    $('#loginForm').bind('submit', function(e){
+        e.preventDefault()
+        var data = {email:$('#useremail').val(), password:$('#pass').val()}
+        $.post(base_url+'/user/sign-in', data, function(response){
+            if (response && !response.error) {
+                location.href = '/admin/articles'
+            }
+        })
+    })
+
+    $('#activateForm').bind('submit', function(e){
+        e.preventDefault()
+        const params = new URLSearchParams(window.location.search)
+        const identity = params.get('userid')
+        var data = {identity, password:$('#pass1').val()}
+        $.post(base_url+'/user/activate-user', data, function(response){
+            if (response && !response.error){
+                //re-model this part much later....okay
+                location.href = '/auth/sign-in'
+            } else {
+                $('.error-msg').text(response.message)
+            }
+        })
+    })
 })

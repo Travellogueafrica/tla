@@ -181,6 +181,21 @@ functions:
       - httpApi:
           path: /api/v1/content/delete
           method: get
+      - httpApi:
+          path: /api/v1/user/sign-in
+          method: post
+      - httpApi:
+          path: /api/v1/user/activate-user
+          method: post
+  auth:
+    handler: auth.handler
+    events:
+        - httpApi:
+            path: /auth/sign-in
+            method: get
+        - httpApi:
+            path: /auth/set-password
+            method: get
   static:
     handler: app.static
     events:
