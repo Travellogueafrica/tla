@@ -2,6 +2,7 @@ const slugify = require('slugify')
 const Resp = require('./Response')
 const userModel = require('./../model/UserModel')
 const Util = require('./../libraries/Utility')
+const {sendMail} = require('./../libraries/Mailer')
 
 const UserInit = {
 
@@ -18,8 +19,16 @@ const UserInit = {
             userModel.create(data, (err, resp) => {
                 if (err)
                     return callback(Resp.error({msg:'Error Ecountered', resp:null}))
-                else 
-                    return callback(Resp.success({msg:'New user added', resp:resp}))
+                else {
+                    const mailOption = {sender:'support@travellogueafrica.com', recipient:resp.email, subject:"Set Password", msg:{name:resp.firstname, link:'http://localhost:5300/auth/set-password?userid='+resp._id},template:'activate'}
+                    sendMail(mailOption, (response) => {
+                        if (response.err)
+                            return callback(Resp.error({msg:'Unable to send mail', resp:response.err}))
+                        else
+                            return callback(Resp.success({msg:'Check your mail for activation link', resp:resp}))
+                    })
+                }
+                    
             })
         } else 
             return callback(Resp.error({msg:'Invalid Parameter', resp:error}))
@@ -109,6 +118,28 @@ const UserInit = {
         } else {
             return callback(Resp.error({msg:'Invalid Parameter', resp:error}))
         }
+    },
+
+    _password_reset: (param, callback) => {
+        const error = []
+        if (!param.email || param.email == '')error.push('Email is required')
+
+        if (error.length === 0) {
+            userModel.findOne({email:param.email}, (err, user) => {
+                if (user){
+                    const mailOption = {sender:'support@travellogueafrica.com', recipient:user.email, subject:'Set New Password', msg:{name:user.firstname, link:'http://localhost:5300/auth/set-password?userid='+user._id}, template:'activate'}
+                    sendMail(mailOption, (response) => {
+                        if (response && !response.error){
+                            return callback(Resp.success({msg:'Check your inbox for reset link', resp:null}))
+                        } else 
+                            return callback(Resp.error({msg:'Something went wrong.', resp:err}))
+                    })
+                } else {
+                    return callback(Resp.error({msg:'User Not Found', resp:null}))
+                }
+            })
+        } else
+            return callback(Resp.error({msg:'Invalid Parameter', resp:error}))
     }
 }
 

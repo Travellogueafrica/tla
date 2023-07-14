@@ -187,6 +187,9 @@ functions:
       - httpApi:
           path: /api/v1/user/activate-user
           method: post
+      - httpApi:
+          path: /api/v1/user/reset-password
+          method: post
   auth:
     handler: auth.handler
     events:
@@ -195,6 +198,9 @@ functions:
             method: get
         - httpApi:
             path: /auth/set-password
+            method: get
+        - httpApi:
+            path: /auth/forgot-password
             method: get
   static:
     handler: app.static

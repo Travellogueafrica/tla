@@ -10,6 +10,10 @@ const AuthInit = {
 
     activate_user: (req, res) => {
         res.render('auth/activate', {})
+    },
+
+    forgot_password: (req, res) => {
+        res.render('auth/reset', {})
     }
 
 }

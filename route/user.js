@@ -44,4 +44,10 @@ router.post('/activate-user', (req, res) => {
     })
 })
 
+router.post('/reset-password', (req, res) => {
+    userDAO._password_reset(Util.param_extract(req), (state) => {
+        Util.resp(res).json(state)
+    })
+})
+
 module.exports = router
