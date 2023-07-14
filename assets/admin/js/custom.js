@@ -258,6 +258,8 @@ $(document).ready(function($){
         $.post(base_url+'/user/sign-in', data, function(response){
             if (response && !response.error) {
                 location.href = '/admin/articles'
+            } else {
+                $('.error-msg').text(response.message)
             }
         })
     })
@@ -273,6 +275,26 @@ $(document).ready(function($){
                 location.href = '/auth/sign-in'
             } else {
                 $('.error-msg').text(response.message)
+            }
+        })
+    })
+
+    $('#resetForm').bind('submit', function(e) {
+        e.preventDefault()
+        var data = {email:$('#useremail').val()}
+        $.post(base_url+'/user/reset-password', data, function(response){
+            if (response && !response.error){
+                $('.msg').html(`
+                <div class="alert alert-success text-center mb-4" role="alert">
+                    Check your inbox for reset instruction.
+                </div>
+                `)
+            } else {
+                $('.msg').html(`
+                <div class="alert alert-danger text-center mb-4" role="alert">
+                    Something is wrong. Are you sure about your email?
+                </div>
+                `)
             }
         })
     })
