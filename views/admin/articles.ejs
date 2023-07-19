@@ -93,23 +93,44 @@
                                 </tbody>
                             </table>
                         </div>
-                        <ul class="pagination pagination-rounded justify-content-end mb-2">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                    <i class="mdi mdi-chevron-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                    <i class="mdi mdi-chevron-right"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <% if (pages > 1) { %>
+                            <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                <% if (current == 1) { %>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                        <i class="mdi mdi-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <% } else { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/admin/articles/<%- parseInt(current) - 1 %>" aria-label="Previous">
+                                            <i class="mdi mdi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <% } %>
+                                    <% let i = (parseInt(current) > 10 ? parseInt(current) - 9 : 1) %>
+                                    <% if (i !== 1) { %>
+                                        <li style="display:none"><a href="#">...</a></li>
+                                    <% } %>
+                                    <% for (; i <= (parseInt(current) + 4) && i <= pages; i++) { %>
+                                        <% if (i == current) { %>
+                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);"><%- i %></a></li>
+                                        <% } else { %>
+                                            <li class="page-item"><a class="page-link" href="/admin/articles/<%- i %>"><%- i %></a></li>
+                                            <% } %>
+                                        <% } %>
+                                        <% if (i == parseInt(current) + 9 && i < pages) {%>
+                                            <li class="disabled"><a href="#">...</a></li>
+                                        <% } %>
+                                        <% if (current < pages){ %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/articles/<%- parseInt(current) + 1 %>" aria-label="Next">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        <% } %>
+                            </ul>
+                        <% } %>
                     </div>
                 </div>
             </div>

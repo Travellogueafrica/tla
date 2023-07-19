@@ -3,127 +3,65 @@
         <!--category header-->
         <div class="archive-header">
             <div class="breadcrumb font-small">
-                <a href="index.html">Home</a>
-                <span></span> Science
+                <a href="/">Home</a>
+                <span></span> <%- cat.label %>
             </div>
-            <h2 class="font-weight-bold"><span class="font-family-normal">Science</span></h2>
+            <h2 class="font-weight-bold"><span class="font-family-normal"><%- cat.label %></span></h2>
             <span class="line-dots mt-30 mb-30"></span>
         </div>
         <div class="row vertical-divider mb-50">
             <div class="col-lg-9 col-md-12">
                 <div class="loop-grid-3">
-                    <article class="row wow fadeIn animated">
-                        <div class="col-md-4">
-                            <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="/static/main/imgs/news/news-16.jpg" alt=""></a></figure>
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="post-title mb-10 font-weight-bold">
-                                <a href="single.html">The Endgame for LinkedIn Is Coming</a>
-                            </h4>
-                            <p class="excerpt mb-20">
-                                After two years, Microsoft still hasn’t delivered on its grand vision for LinkedIn. And it may never do so. Every time this LinkedIn commercial pops up on YouTube I am reminded of how low the company has fallen to.
-                            </p>
-                            <div class="entry-meta meta-2 font-x-small color-muted">
-                                <p class="mb-5">
-                                    By <a href="/author/steven-kenedy"><span class="author-name">Steven Kenedy</span></a>
-                                </p>
-                                <span class="mr-10"> 15 April 2020</span>
-                                <span class="has-dot"> 8 mins read</span>
+                    <% if (articles.length){ %>
+                        <% articles.forEach(function(article){ %>
+                            <article class="row wow fadeIn animated">
+                                <div class="col-md-4">
+                                    <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="<%- article.image[1] %>" alt=""></a></figure>
+                                </div>
+                                <div class="col-md-8">
+                                    <h4 class="post-title mb-10 font-weight-bold">
+                                        <a href="single.html"><%- article.title %></a>
+                                    </h4>
+                                    <p class="excerpt mb-20">
+                                       <%- article.short_content %>
+                                    </p>
+                                    <div class="entry-meta meta-2 font-x-small color-muted">
+                                        <p class="mb-5">
+                                            By <a href="/author/steven-kenedy"><span class="author-name"><%- article.author.firstname %> <%- article.author.lastname %></span></a>
+                                        </p>
+                                        <span class="mr-10"> <%- formatDate(article.date_added) %></span>
+                                        <!-- <span class="has-dot"> 8 mins read</span> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="horizontal-divider mt-15 mb-15"></div>
+                                </div>
+                            </article>
+                        <% }) %>
+                    <% }else { %>
+                        <main class="mt-100 mb-200">
+                            <div class="container">
+                                <div class="entry-wraper">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 d-lg-block d-none text-center"><img class="d-inline" src="/static/main/imgs/theme/404.png" alt=""></div>
+                                        <div class="col-lg-6 col-md-12 text-center">
+                                            <h1 class="mb-20 display-1">404</h1>
+                                            <h4 class="mb-30">We’re sorry, we seem to have lost this page, but we don’t want to lose you.</h4>
+                                            <p>Visit the <a href="/"><u>Homepage</u></a> or <a href="#"><u>Report the broken link here</u></a></p>
+                                            <form action="#" method="get" class="search-form d-lg-flex open-search mb-30">
+                                                <i class="icon-search"></i>
+                                                <input class="form-control" name="name" id="name" type="text" placeholder="Search...">
+                                            </form>
+                                            <div class="form-group">
+                                                <a href="#" class="btn btn-facebook btn-outline-secondary">Contact us</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="horizontal-divider mt-15 mb-15"></div>
-                        </div>
-                    </article>
-                    <article class="row wow fadeIn animated">
-                        <div class="col-md-4">
-                            <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="/static/main/imgs/news/news-18.jpg" alt=""></a></figure>
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="post-title mb-10 font-weight-bold">
-                                <a href="single.html">Neuroscience Says Listening to This Song Reduces Anxiety by Up to 65 Percent</a>
-                            </h4>
-                            <p class="excerpt mb-20">
-                                After a calamitous drop in March, the stock market has had a ferocious rally, despite a cascade of awful news. How can investors cope?
-                            </p>
-                            <div class="entry-meta meta-2 font-x-small color-muted">
-                                <p class="mb-5">
-                                    By <a href="/author/steven-kenedy"><span class="author-name">Sally Rooney</span></a>
-                                </p>
-                                <span class="mr-10"> 12 May 2020</span>
-                                <span class="has-dot"> 6 mins read</span>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="horizontal-divider mt-15 mb-15"></div>
-                        </div>
-                    </article>
-                    <article class="row wow fadeIn  animated">
-                        <div class="col-md-4">
-                            <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="/static/main/imgs/news/news-15.jpg" alt=""></a></figure>
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="post-title mb-10 font-weight-bold">
-                                <a href="single.html">I Have A Theory That Donald Glover And Childish Gambino Are Secretly The Same Person</a>
-                            </h4>
-                            <p class="excerpt mb-20">
-                                For anyone who doesn’t know who these 2 dudes are, Donald Glover is a beloved actor/writer/comedian and Childish Gambino is a popular musician.
-                            </p>
-                            <div class="entry-meta meta-2 font-x-small color-muted">
-                                <p class="mb-5">
-                                    By <a href="/author/steven-kenedy"><span class="author-name">David Chariandy</span></a>
-                                </p>
-                                <span class="mr-10"> 15 May 2020</span>
-                                <span class="has-dot"> 18 mins read</span>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="horizontal-divider mt-15 mb-15"></div>
-                        </div>
-                    </article>
-                    <article class="row wow fadeIn animated">
-                        <div class="col-md-4">
-                            <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="/static/main/imgs/news/news-14.jpg" alt=""></a></figure>
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="post-title mb-10 font-weight-bold">
-                                <a href="single.html">Soft and Comfortable with the Buckyball Creative Office Chair</a>
-                            </h4>
-                            <p class="excerpt mb-20">
-                                Buckyball – creative office chair created by designer Svyatoslav Zbroy – can be a part of the scientific research of fullerenes. Six spheres, consisting of twelve pentagons each, form an unusual structure. Like a stable and multifunctional carbon molecule, Buckyball can withstand heavy loads without losing its shape.
-                            </p>
-                            <div class="entry-meta meta-2 font-x-small color-muted">
-                                <p class="mb-5">
-                                    By <a href="/author?id=09876543211234567890"><span class="author-name">Jessie Greengrass</span></a>
-                                </p>
-                                <span class="mr-10"> 15 March 2020</span>
-                                <span class="has-dot"> 11 mins read</span>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="horizontal-divider mt-15 mb-15"></div>
-                        </div>
-                    </article>
-                    <article class="row wow fadeIn animated">
-                        <div class="col-md-4">
-                            <figure class="mb-md-0 mb-sm-3"><a href="single.html"><img src="/static/main/imgs/news/news-6.jpg" alt=""></a></figure>
-                        </div>
-                        <div class="col-md-8">
-                            <h4 class="post-title mb-10 font-weight-bold">
-                                <a href="single.html">World’s 12 Most Expensive Luxury Cars</a>
-                            </h4>
-                            <p class="excerpt mb-20">
-                                These beautiful vessels are built with the latest technology and of course incredibly luxurious. Their owners are very wealthy people – members of royal families, American business magnates, Russian billionaire businessmen and world-class politicians.
-                            </p>
-                            <div class="entry-meta meta-2 font-x-small color-muted">
-                                <p class="mb-5">
-                                    By <a href="author.html"><span class="author-name">Eley Williams</span></a>
-                                </p>
-                                <span class="mr-10"> 25 February 2020</span>
-                                <span class="has-dot"> 14 mins read</span>
-                            </div>
-                        </div>
-                    </article>
+                        </main>
+                    <% } %>
+                    
                 </div>
             </div>
             <!-- aside -->

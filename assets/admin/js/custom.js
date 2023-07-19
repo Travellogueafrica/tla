@@ -96,7 +96,7 @@ $(document).ready(function($){
             category:$('#category').val(),
             type:$('#type').val(),
             short_content:$('#short-content').val(),
-            content:$('#content').html(),
+            content: $('#summernote').summernote('code'),
             media:$('#media').val(),
             keywords:$('#keywords').val(),
             author:$('#author').val(),

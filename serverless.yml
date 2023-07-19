@@ -110,6 +110,9 @@ functions:
           path: /admin/articles
           method: get
       - httpApi:
+          path: /admin/articles/{page}
+          method: get
+      - httpApi:
           path: /admin/submit-article
           method: get
       - httpApi:
@@ -122,7 +125,13 @@ functions:
           path: /admin/destinations
           method: get
       - httpApi:
+          path: /admin/destinations/{page}
+          method: get
+      - httpApi:
           path: /admin/users
+          method: get
+      - httpApi:
+          path: /admin/users/{page}
           method: get
       - httpApi:
           path: /api/v1/user/create
@@ -189,6 +198,9 @@ functions:
           method: post
       - httpApi:
           path: /api/v1/user/reset-password
+          method: post
+      - httpApi:
+          path: /api/v1/subscriber/add-subscriber
           method: post
   auth:
     handler: auth.handler

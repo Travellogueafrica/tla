@@ -9,13 +9,13 @@
                             <% slideItems.forEach(function(item){ %>
                                 <article class="first-post slide-fade-item mb-md-4 mb-lg-0">
                                     <figure class="mb-30">
-                                        <a href="/content/some-sort-of-slug">
+                                        <a href="/content/<%- item.slug %>">
                                             <img src="<%- item.image[1] %>" alt="">
                                         </a>
                                     </figure>
                                     <div class="post-content">
                                         <h3 class="mb-20 position-relative font-weight-bold">
-                                            <a href="/content/some-sort-of-slug"><%- item.title %></a>
+                                            <a href="/content/<%- item.slug %>"><%- item.title %></a>
                                         </h3>
                                         <p class="excerpt">
                                             <%- item.short_content %>
@@ -42,16 +42,16 @@
                             <% main_one.forEach(function(item){ %>
                                 <article class="col-md-6 mb-sm-3 wow fadeIn animated">
                                     <figure class="mb-15">
-                                        <a href="single.html">
+                                        <a href="/content/<%- item.slug %>"">
                                             <img src="<%- item.image[1] %>" alt="">
                                         </a>
                                     </figure>
                                     <h6 class="post-title font-weight-bold mb-10">
-                                        <a href="single.html"><%- item.title %></a>
+                                        <a href="/content/<%- item.slug %>""><%- item.title %></a>
                                     </h6>
-                                    <p class="excerpt">
+                                    <!-- <p class="excerpt">
                                         <%- item.short_content %>
-                                    </p>
+                                    </p> -->
                                     <div class="entry-meta meta-2 font-x-small color-muted">
                                         <p class="mb-5">
                                             By <a href="author.html"><span class="author-name">Steven Kenedy</span></a>
@@ -71,16 +71,16 @@
                             <% main_two.forEach(function(item){ %>
                                 <article class="col-md-6 mb-sm-3 wow fadeIn animated">
                                     <figure class="mb-15">
-                                        <a href="single.html">
+                                        <a href="/content/<%- item.slug %>"">
                                             <img src="<%- item.image[1] %>" alt="">
                                         </a>
                                     </figure>
                                     <h6 class="post-title font-weight-bold mb-10">
-                                        <a href="single.html"><%- item.title %></a>
+                                        <a href="/content/<%- item.slug %>""><%- item.title %></a>
                                     </h6>
-                                    <p class="excerpt">
+                                    <!-- <p class="excerpt">
                                         <%- item.short_content %>
-                                    </p>
+                                    </p> -->
                                     <div class="entry-meta meta-2 font-x-small color-muted">
                                         <p class="mb-5">
                                             By <a href="author.html"><span class="author-name">Steven Kenedy</span></a>
@@ -694,16 +694,17 @@
                             </h6>
                             <div class="newsletter">
                                 <p class="">Continue reading uninterrupted with a subscription</p>
-                                <form target="_blank" action="#" method="get" class="subscribe_form relative mail_part">
+                                <form action="#" method="get" class="subscribe_form relative mail_part" id="subscribe">
                                     <div class="form-newsletter-cover">
                                         <div class="form-newsletter">
-                                            <input type="email" name="EMAIL" placeholder="Email address" required="">
+                                            <input type="email" id="useremail" placeholder="Email address" required="">
                                             <button type="submit">
                                                 <span class="long-arrow long-arrow-right"></span>
                                             </button>
                                         </div>
                                     </div>
                                 </form>
+                                <small class="success"></small>
                             </div>
                         </div>
                     </div>

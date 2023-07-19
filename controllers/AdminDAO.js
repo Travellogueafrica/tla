@@ -23,7 +23,7 @@ const AdminInit = {
             if (err)
                 res.render('admin/error', {title:'Travellogue | Admin - Error Encountered'})
             content.count({}).exec((err, count) => {
-                res.render('admin/articles', {title:'Travellogue | Admin - All Articles', articles, formatDate})
+                res.render('admin/articles', {title:'Travellogue | Admin - All Articles', articles, formatDate, current:page, pages: Math.ceil(count / limit)})
             })
         })
     },
@@ -78,8 +78,8 @@ const AdminInit = {
         .exec((err, destinations) => {
             if (err)
                 res.render('admin/error', {title:'Travellogue | Admin - Error Encountered'})
-            user.count({}).exec((err, count) => {
-                res.render('admin/destinations', {title:'Travellogue | Admin - Destinations', destinations})
+            destination.count({}).exec((err, count) => {
+                res.render('admin/destinations', {title:'Travellogue | Admin - Destinations', destinations, current:page, pages: Math.ceil(count / limit)})
             })
         })
     },
@@ -94,7 +94,7 @@ const AdminInit = {
             if (err)
                 res.render('admin/error', {title:'Travellogue | Admin - Error Encountered'})
             user.count({}).exec((err, count) => {
-                res.render('admin/users', {title:'Travellogue | Admin - All Users', users})
+                res.render('admin/users', {title:'Travellogue | Admin - All Users', users, current:page, pages: Math.ceil(count / limit)})
             })
         })
     }

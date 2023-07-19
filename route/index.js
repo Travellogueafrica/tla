@@ -17,5 +17,6 @@ router.use(api+'/user', require('./user'))
 router.use(api+'/category', require('./category'))
 router.use(api+'/destination', require('./destination'))
 router.use(api+'/content', require('./content'))
+router.use(api+'/subscriber', require('./subscriber'))
 
 module.exports = router

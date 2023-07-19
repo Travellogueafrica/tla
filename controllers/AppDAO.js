@@ -1,4 +1,5 @@
 const content = require('./../model/ContentModel')
+const category = require('./../model/CategoryModel')
 
 const AppInit = {
 
@@ -16,16 +17,38 @@ const AppInit = {
         
     },
 
-    category: (req, res) => {
-        res.render('main/category', {title:'Travellogue Africa | Category Page'})
+    category: async (req, res) => {
+        try {
+            const limit = 5
+            const slug = req.params.slug
+            const articles = await content.find({'category.slug':slug})
+            const cat = await category.findOne({slug:slug})
+            const formatDate = (date) => {
+                const options = { day: 'numeric', month: 'long', year: 'numeric' }
+                return date.toLocaleDateString('en-US', options)
+            }
+            res.render('main/category', {title:'Travellogue Africa | Category Page', articles, cat, formatDate})
+        } catch(err){
+
+        }
     },
 
     destination: (req, res) => {
         res.render('main/destination')
     },
 
-    content: (req, res) => {
-        res.render('main/content')
+    content: async (req, res) => {
+        try {
+            const slug = req.params.slug
+            const article = await content.findOne({slug:slug})
+            const formatDate = (date) => {
+                const options = { day: 'numeric', month: 'long', year: 'numeric' }
+                return date.toLocaleDateString('en-US', options)
+            }
+            res.render('main/content', {title:'Travellogue Africa | Article', article, formatDate})
+        } catch (err) {
+
+        }
     },
 
     author_post: (req, res) => {

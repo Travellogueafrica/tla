@@ -1,4 +1,5 @@
 const _config = require('./../config/app.json')
+const dotenv = require('dotenv').config()
 
 const Util = {
 
@@ -33,6 +34,12 @@ const Util = {
         const jwt = require('jsonwebtoken')
         const token = jwt.sign(payload, _config.jwt.key, {expiresIn: _config.jwt.expires})
         return callback(token)
+    },
+
+    geoInfo: async (address, callback) => {
+        const axios = require('axios')
+        const geoInfo = await axios.get(process.env.GEOAPI+'&ip_address='+address)
+        return callback(geoInfo.data)
     }
 }
 
