@@ -134,6 +134,15 @@ functions:
           path: /admin/users/{page}
           method: get
       - httpApi:
+          path: /admin/subscribers
+          method: get
+      - httpApi:
+          path: /admin/subscribers/{page}
+          method: get
+      - httpApi:
+          path: /admin/newsletter
+          method: get
+      - httpApi:
           path: /api/v1/user/create
           method: post
       - httpApi:

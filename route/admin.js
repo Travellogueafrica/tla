@@ -13,5 +13,8 @@ router.get('/destinations', AuthChecker, adminDAO.get_destinations)
 router.get('/destinations/:page', AuthChecker, adminDAO.get_destinations)
 router.get('/users', AuthChecker, adminDAO.get_users)
 router.get('/users/:page', AuthChecker, adminDAO.get_users)
+router.get('/subscribers', AuthChecker, adminDAO.subscriber_lists)
+router.get('/subscribers/:page', AuthChecker, adminDAO.subscriber_lists)
+router.get('/newsletter', AuthChecker, adminDAO.push_newsletter)
 
 module.exports = router

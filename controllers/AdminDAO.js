@@ -3,6 +3,7 @@ const tag = require('./../model/TagModel')
 const user = require('./../model/UserModel')
 const destination = require('./../model/DestinationModel')
 const content = require('./../model/ContentModel')
+const subscriber = require('./../model/SubscriberModel')
 
 const AdminInit = {
 
@@ -97,6 +98,27 @@ const AdminInit = {
                 res.render('admin/users', {title:'Travellogue | Admin - All Users', users, current:page, pages: Math.ceil(count / limit)})
             })
         })
+    },
+
+    subscriber_lists: (req, res) => {
+        const limit = 8
+        let page = req.params.page || 1
+        subscriber.find({}).sort({date_added:-1})
+        .skip((limit * page) - limit)
+        .limit(limit)
+        .exec((err, members) => {
+            if (err)
+                res.render('admin/error', {title:'Travellogue | Admin - Error Encountered'})
+            subscriber.count({}).exec((err, count) => {
+                res.render('admin/subscribers', {title:'Travellogue | Admin - Subscriber Lists', members, current:page, pages: Math.ceil(count / limit)})
+            })
+        })
+        
+    },
+
+    push_newsletter: (req, res) => {
+        
+        res.render('admin/newsletter', {title:'Travellogue | Admin - Newsletter'})
     }
 }
 
