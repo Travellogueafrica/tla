@@ -2,7 +2,8 @@ $(document).ready(function($){
     'use strict';
     //var base_url = 'http://localhost:5300/api/v1'
     var base_url = '/api/v1'
-    var upload_url = 'http://localhost:5406/uploader/api/1.0'
+    //var upload_url = 'http://localhost:5406/uploader/api/1.0'
+    var upload_url = 'https://file-uploader-1rqu.onrender.com/uploader/api/1.0'
 
     //userform handler
     $('#userForm').bind('submit', function(event){
