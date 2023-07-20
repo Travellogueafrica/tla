@@ -1,94 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Starter Page | Skote - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/admin/images/favicon.ico" />
 
-    <head>
-        
-        <meta charset="utf-8" />
-        <title>Starter Page | Skote - Admin & Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="/static/admin/images/favicon.ico">
+    <link
+      href="/static/admin/libs/select2/css/select2.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-        <link href="/static/admin/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link
+      href="/static/admin/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Icons Css -->
+    <link
+      href="/static/admin/css/icons.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- App Css-->
+    <link
+      href="/static/admin/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Summernote -->
+    <link href="/static/admin/summernote/summernote-bs4.css" rel="stylesheet" />
+  </head>
 
+  <body data-sidebar="dark" data-layout-mode="light">
+    <div id="layout-wrapper">
+      <%- include('partials/header') %> <%- include('partials/navigation') %>
+      <div class="main-content">
+        <%- body %> <%- include('partials/footer') %>
+      </div>
+    </div>
 
-        <!-- Bootstrap Css -->
-        <link href="/static/admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="/static/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="/static/admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-        <!-- Summernote -->
-        <link href="/static/admin/summernote/summernote-bs4.css" rel="stylesheet">
-    </head>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-    <body data-sidebar="dark" data-layout-mode="light">
+    <!-- JAVASCRIPT -->
+    <script src="/static/admin/libs/jquery/jquery.min.js"></script>
+    <script src="/static/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/admin/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/static/admin/libs/simplebar/simplebar.min.js"></script>
+    <script src="/static/admin/libs/node-waves/waves.min.js"></script>
+    <script src="/static/admin/libs/select2/js/select2.min.js"></script>
+    <script src="/static/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
-        <div id="layout-wrapper">
-            <%- include('partials/header') %>
-            <%- include('partials/navigation') %>
-            <div class="main-content">
-                <%- body %>
-                <%- include('partials/footer') %>
-            </div>
-        </div>
-        
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
+    <script src="/static/admin/js/pages/bootstrap-toastr.init.js"></script>
+    <script src="/static/admin/js/pages/form-advanced.init.js"></script>
+    <script src="/static/admin/libs/parsleyjs/parsley.min.js"></script>
+    <script src="/static/admin/js/pages/form-validation.init.js"></script>
+    <script src="/static/admin/js/pages/modal.init.js"></script>
+    <script src="/static/admin/js/pages/alerts.init.js"></script>
 
-        <!-- JAVASCRIPT -->
-        <script src="/static/admin/libs/jquery/jquery.min.js"></script>
-        <script src="/static/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/admin/libs/metismenu/metisMenu.min.js"></script>
-        <script src="/static/admin/libs/simplebar/simplebar.min.js"></script>
-        <script src="/static/admin/libs/node-waves/waves.min.js"></script>
-        <script src="/static/admin/libs/select2/js/select2.min.js"></script>
-        <script src="/static/admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
-        
+    <script src="/static/admin/js/app.js"></script>
+    <script src="/static/admin/js/custom.js"></script>
+    <script src="/static/admin/summernote/summernote-bs4.js"></script>
 
-        <script src="/static/admin/js/pages/bootstrap-toastr.init.js"></script>
-        <script src="/static/admin/js/pages/form-advanced.init.js"></script>
-        <script src="/static/admin/libs/parsleyjs/parsley.min.js"></script>
-        <script src="/static/admin/js/pages/form-validation.init.js"></script>
-        <script src="/static/admin/js/pages/modal.init.js"></script>
-        <script src="/static/admin/js/pages/alerts.init.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#summernote").summernote({
+          toolbar: [
+            // [groupName, [list of button]]
+            ["style", ["style"]],
+            [
+              "font",
+              [
+                "bold",
+                "italic",
+                "underline",
+                "clear",
+                "strikethrough",
+                "superscript",
+                "subscript",
+              ],
+            ],
+            ["fontsize", ["fontsize"]],
+            ["fontname", ["fontname"]], //image, headings, blockquote, video, link, table
+            ["color", ["color"]],
+            ["para", ["ul", "ol", "paragraph"]],
+            ["height", ["height"]],
+            ["table", ["table"]],
+            ["insert", ["link", "picture", "video"]],
+            ["view", ["fullscreen", "codeview", "undo", "redo", "help"]],
+          ],
+          height: 300,
+          spellCheck: true,
+          placeholder: "Write content here...",
+        });
+        $(".note-editor .note-btn.btn.dropdown-toggle").on(
+          "click",
+          function () {
+            $(this).toggleClass("show");
+            $(this).next().toggleClass("show");
+          }
+        );
 
-        <script src="/static/admin/js/app.js"></script>
-        <script src="/static/admin/js/custom.js"></script>
-        <script src="/static/admin/summernote/summernote-bs4.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#summernote').summernote({
-                    toolbar: [
-                        // [groupName, [list of button]]
-                        ['style', ['style']],
-                        ['font', ['bold', 'italic', 'underline', 'clear', 'strikethrough', 'superscript', 'subscript']],
-                        ['fontsize', ['fontsize']],
-                        ['fontname', ['fontname']], //image, headings, blockquote, video, link, table
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture', 'video']],
-                        ['view', ['fullscreen', 'codeview', 'undo', 'redo', 'help']],
-                    ],
-                    height:300,
-                    spellCheck:true,
-                    placeholder:'Write content here...'
-                });
-                $('.note-editor .note-btn.btn.dropdown-toggle').on('click', function() {
-                    $(this).toggleClass('show');
-                    $(this).next().toggleClass('show');
-                });
-
-                $('.note-editor .dropdown-item, .note-editor .note-color-btn, .note-editor .note-btn-group.note-align .note-btn.btn')
-                    .on('click', function() {
-                    $('.note-editor .show').removeClass('show');
-                });
-            });
-        </script>
-       
-    </body>
+        $(
+          ".note-editor .dropdown-item, .note-editor .note-color-btn, .note-editor .note-btn-group.note-align .note-btn.btn"
+        ).on("click", function () {
+          $(".note-editor .show").removeClass("show");
+        });
+      });
+    </script>
+  </body>
 </html>
