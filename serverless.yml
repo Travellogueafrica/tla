@@ -134,6 +134,9 @@ functions:
           path: /admin/users/{page}
           method: get
       - httpApi:
+            path: /admin/comments
+            method: get
+      - httpApi:
           path: /admin/subscribers
           method: get
       - httpApi:
@@ -211,6 +214,18 @@ functions:
       - httpApi:
           path: /api/v1/subscriber/add-subscriber
           method: post
+      - httpApi:
+            path: /api/v1/comment/add
+            method: post
+      - httpApi:
+            path: /api/v1/comment/moderate
+            method: post
+      - httpApi:
+            path: /api/v1/comment/by-identity
+            method: get
+      - httpApi:
+          path: /api/v1/comment/delete
+          method: get
   auth:
     handler: auth.handler
     events:

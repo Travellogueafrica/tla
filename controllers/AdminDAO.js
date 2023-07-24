@@ -4,6 +4,7 @@ const user = require('./../model/UserModel')
 const destination = require('./../model/DestinationModel')
 const content = require('./../model/ContentModel')
 const subscriber = require('./../model/SubscriberModel')
+const comment = require('./../model/CommentModel')
 
 const AdminInit = {
 
@@ -117,8 +118,23 @@ const AdminInit = {
     },
 
     push_newsletter: (req, res) => {
-        
+
         res.render('admin/newsletter', {title:'Travellogue | Admin - Newsletter'})
+    },
+
+    get_comments: (req, res) => {
+        const limit = 8
+        let page = req.params.page || 1
+        comment.find({}).sort({date_added:-1})
+        .skip((limit * page) - limit)
+        .limit(limit)
+        .exec((err, comments) => {
+            if (err)
+                res.render('admin/error', {title:'Travellogue | Admin - Error Encountered'})
+            comment.count().exec((err, count) => {
+                res.render('admin/comments', {title:'Travellogue | Admin - Comments', comments, current:page, pages: Math.ceil(count / limit)})
+            })
+        })
     }
 }
 

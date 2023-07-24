@@ -16,5 +16,6 @@ router.get('/users/:page', AuthChecker, adminDAO.get_users)
 router.get('/subscribers', AuthChecker, adminDAO.subscriber_lists)
 router.get('/subscribers/:page', AuthChecker, adminDAO.subscriber_lists)
 router.get('/newsletter', AuthChecker, adminDAO.push_newsletter)
+router.get('/comments', AuthChecker, adminDAO.get_comments)
 
 module.exports = router

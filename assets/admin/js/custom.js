@@ -1,6 +1,5 @@
 $(document).ready(function($){
     'use strict';
-    //var base_url = 'http://localhost:5300/api/v1'
     var base_url = '/api/v1'
     //var upload_url = 'http://localhost:5406/uploader/api/1.0'
     var upload_url = 'https://file-uploader-1rqu.onrender.com/uploader/api/1.0'
@@ -145,6 +144,18 @@ $(document).ready(function($){
         })
     })
 
+    //get user comment for moderation
+    $('.user-comment').on('click', function(){
+        var id = $(this).attr('data-id')
+        $.get(base_url+'/comment/by-identity?identity='+id, function(data){
+            $('#identity').val(data.response._id)
+            $('#username').text(data.response.name)
+            $('#date').text(data.response.date_added)
+            $('#user').text(data.response.name)
+            $('#comment').text(data.response.comment)
+        })
+    })
+
     //get tag data for update
     $('.delete-tag').on('click', function(){
         $.get(base_url+'/category/tag/delete?identity='+$(this).attr('data-id'), function(response){
@@ -164,6 +175,19 @@ $(document).ready(function($){
             $('#country').val(data.response.country)
             $('#profile').val(data.response.profile)
             $('#image').val(data.response.image)
+        })
+    })
+
+    //delete user after confirmation
+    $('.delete-id').on('click', function(){
+        $('#del-id').val($(this).attr('data-id'))
+        $('#delForm').bind('submit', function(e){
+            e.preventDefault()
+            $.get(base_url+'/comment/delete?identity='+$('#del-id').val(), function(response){
+                if (response && !response.error) {
+                    location.reload()
+                }
+            })
         })
     })
 
@@ -298,5 +322,18 @@ $(document).ready(function($){
                 `)
             }
         })
+    })
+
+    $('#commentForm').bind('submit', function(e){
+        e.preventDefault()
+        let approved = $('#approve').is(':checked');
+        var data = {identity:$('#identity').val(), moderation: approved ? 'Approved' : 'Disapproved', status:1}
+        $.post(base_url+'/comment/moderate', data, function(response){
+            if (response && !response.error){
+                location.reload()
+            }
+            return
+        })
+        
     })
 })

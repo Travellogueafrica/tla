@@ -1,0 +1,134 @@
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Comments</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Comments</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-nowrap table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 70px;">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Post Title</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (comments.length) { %>
+                                    <% comments.forEach(function(comment){ %> 
+                                        <tr>
+                                            <td>
+                                                <div class="form-check font-size-16">
+                                                    <input class="form-check-input" type="checkbox" id="orderidcheck01">
+                                                    <label class="form-check-label" for="orderidcheck01"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark"><%- comment.name %></a></h5>
+                                                <p class="text-muted mb-0"><%- comment.email %></p>
+                                            </td>
+                                            <td><%- comment.title.length <= 40 ? comment.title : comment.title.slice(0,40) + '...' %></td>
+                                            <td><%- comment.moderation %></td>
+                                            <td>
+                                                <div class="d-flex gap-3">
+                                                    <a href="javascript:void(0);" class="text-success user-comment" data-bs-toggle="modal" data-bs-target="#viewComment" data-id="<%- comment._id %>"><i class="mdi mdi-eye-circle-outline font-size-18"></i></a>
+                                                    <a href="javascript:void(0);" class="text-danger delete-id" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<%- comment._id %>"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+<!-- End Page-content -->
+
+<!-- comment modal -->
+<div id="viewComment" class="modal" tabindex="-1" aria-labelledby="viewComment" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"><span id="username"></span>'s Comment</h5>      
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <form id="commentForm" method="post">
+                        <div class="card-body">
+                            <p class="text-muted mb-2">On <span id="date"></span>, <span id="user"></span> has this to say:</p>
+                            <p id="comment"></p>
+                            <h5 class="pt-4 pb-2">Comment Moderation</h5>
+                            <div class="row">
+                                <input type="hidden" id="identity" value="">
+                                <div class="form-check mb-3 col-md-3">
+                                    <input class="form-check-input" type="radio" name="formRadios" id="approve" checked="">
+                                    <label class="form-check-label" for="formRadios1">
+                                        Approve
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3 col-md-3">
+                                    <input class="form-check-input" type="radio" name="formRadios" id="disapprove">
+                                    <label class="form-check-label" for="formRadios1">
+                                        Disapprove
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="justify-content: flex-start;">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Moderate</button>
+                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="delForm" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="del-id">
+                    <p>You won't be able to revert this!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes, delete it!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -9,4 +9,15 @@ $(document).ready(function($){
             }
         })
     })
+
+    $('#commentForm').bind('submit', function(e){
+        e.preventDefault()
+        var data = {post_id:$('#post_id').val().trim(), title:$('#title').val().trim(), name:$('#name').val().trim(), email:$('#email').val().trim(), comment:$('#comment').val().trim()}
+        $.post('/api/v1/comment/add', data, function(response){
+            if (response && !response.error){
+                $('#commentForm').get(0).reset()
+            }
+            return
+        })
+    })
 })
