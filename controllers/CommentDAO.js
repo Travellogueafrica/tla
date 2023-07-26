@@ -37,8 +37,7 @@ const CommentInit = {
             if (data) {
                 return callback(Resp.success({msg:"Data found", resp:data})) 
             } else
-                console.log(err)
-                //return callback(Resp.error({msg:"Data not found", resp:null}))
+                return callback(Resp.error({msg:"Data not found", resp:null}))
         })
     },
 
